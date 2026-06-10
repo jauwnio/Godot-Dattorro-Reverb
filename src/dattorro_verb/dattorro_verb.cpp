@@ -116,13 +116,13 @@ void AudioEffectDattorroVerb::_bind_methods() {
 
 CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, dry_wet)
 
-// CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, pre_delay)
-// CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, pre_filter)
-// CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, input_diffusion1)
-// CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, input_diffusion2)
-// CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, decay_diffusion)
-// CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, decay)
-// CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, damping)
+CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, pre_delay)
+CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, pre_filter)
+CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, input_diffusion1)
+CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, input_diffusion2)
+CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, decay_diffusion)
+CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, decay)
+CREATE_GETTER_SETTER(AudioEffectDattorroVerb, double, damping)
 
 double AudioEffectDattorroVerb::get_pre_delay() const { return pre_delay; }
 void AudioEffectDattorroVerb::set_pre_delay(const double p_pre_delay) {
@@ -170,7 +170,7 @@ double AudioEffectDattorroVerb::get_damping() const { return damping; }
 void AudioEffectDattorroVerb::set_damping(const double p_damping) {
 	damping = p_damping;
 	if (instance.is_valid()) {
-		instance->set_damping(damping);
+		instance->set_damping(p_damping);
 	}
 }
 
@@ -190,6 +190,14 @@ void AudioEffectDattorroVerb::set_gain(const float p_gain) {
 Ref<AudioEffectInstance> AudioEffectDattorroVerb::_instantiate() {
 	instance.instantiate(); // create instnce
 	set_gain(get_gain()); // refresh the gain
+	set_dry_wet(get_dry_wet());
+	set_pre_delay(get_pre_delay());
+	set_pre_filter(get_pre_filter());
+	set_input_diffusion1(get_input_diffusion1());
+	set_input_diffusion2(get_input_diffusion2());
+	set_decay_diffusion(get_decay_diffusion());
+	set_decay(get_decay());
+	set_damping(get_damping());
 	return instance;
 }
 
